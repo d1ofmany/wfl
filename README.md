@@ -17,3 +17,6 @@ There are 2 screens:
 - build process and setup
 - heroku setup
 - initial frontend implementation
+
+
+This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).

@@ -21,7 +21,7 @@ class MealNewComponent extends Component {
     handleSubmit (event) {
         event.preventDefault();
         if (this.state.name !== '') {
-            this.props.setMeal(this.state.name);
+            this.props.createMeal(this.state.name);
         }
     }
     

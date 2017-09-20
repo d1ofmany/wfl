@@ -1,85 +1,100 @@
 import axios from 'axios';
 
-export const GET_MEALS = 'GET_MEALS';
-export const SET_MEAL = 'SET_MEAL';
-export const DELETE_MEAL = 'DELETE_MEAL';
-export const SAVE_MEAL = 'SAVE_MEAL';
+import types from './actionTypes';
 
-export const getMeals = (payload) => {
+export const apiError = (payload) => {
     return {
-        type: GET_MEALS,
+        type: types.API_ERROR,
         payload
-    }
-}
+    };
+};
 
-export const getMealsAsync = () => {
+export const readMeals = (payload) => {
+    return {
+        type: types.READ_MEALS,
+        payload
+    };
+};
+
+export const readMealsAsync = () => {
     return (dispatch, getState) => {
-        axios.get('https://d1ofmany-wfl-api.herokuapp.com/meals')
+        return axios.get('https://d1ofmany-wfl-api.herokuapp.com/meals')
             .then(function (response) {
-                dispatch(getMeals(response.data))
+                dispatch(readMeals(response.data));
             })
             .catch(function (error) {
-                console.log(error);
+                dispatch(apiError({ message: error }));
             });
-    }    
-}
+    };    
+};
 
-export const saveMeal = (payload) => {
+export const updateMeal = (payload) => {
     return {
-        type: SAVE_MEAL,
+        type: types.UPDATE_MEAL,
         payload
-    }
-}
+    };
+};
 
-export const saveMealAsync = (id, name) => {
+export const updateMealAsync = (id, name) => {
     return (dispatch, getState) => {
-        axios.post('https://d1ofmany-wfl-api.herokuapp.com/meal/' + id, {name})
-        .then(function (response) {
-                dispatch(saveMeal(response.data));
+        return axios.post('https://d1ofmany-wfl-api.herokuapp.com/meal/' + id, {name})
+            .then(function (response) {
+                dispatch(updateMeal(response.data));
             })
             .catch(function (error) {
-                console.log(error);
+                dispatch(apiError({ message: error }));
             });
     };
 };
 
-export const setMeal = (payload) => {
+export const createMeal = (payload) => {
     return {
-        type: SET_MEAL,
+        type: types.CREATE_MEAL,
         payload
-    }
-}
+    };
+};
 
-export const setMealAsync = (name) => {
+export const createMealAsync = (name) => {
     return (dispatch, getState) => {
-        axios.post('https://d1ofmany-wfl-api.herokuapp.com/meal', {name})
-        .then(function (response) {
-                dispatch(setMeal(response.data));
+        return axios.post('https://d1ofmany-wfl-api.herokuapp.com/meal', {name})
+            .then(function (response) {
+                dispatch(createMeal(response.data));
             })
             .catch(function (error) {
-                console.log(error);
+                dispatch(apiError({ message: error }));
             });
     };
 };
 
 export const deleteMeal = (payload) => {
     return {
-        type: DELETE_MEAL,
+        type: types.DELETE_MEAL,
         payload
-    }
-}
+    };
+};
 
 export const deleteMealAsync = (id) => {
     return (dispatch, getState) => {
-        axios.delete('https://d1ofmany-wfl-api.herokuapp.com/meal/' + id)
-        .then(function (response) {
+        return axios.delete('https://d1ofmany-wfl-api.herokuapp.com/meal/' + id)
+            .then(function (response) {
                 dispatch(deleteMeal(response.data));
             })
             .catch(function (error) {
-                console.log(error);
+                dispatch(apiError({ message: error }));
             });
     };
 };
 
+export const actions = {
+    apiError,
+    readMeals,
+    readMealsAsync,
+    updateMeal,
+    updateMealAsync,
+    createMeal,
+    createMealAsync,
+    deleteMeal,
+    deleteMealAsync
+};
 
-
+export default actions;

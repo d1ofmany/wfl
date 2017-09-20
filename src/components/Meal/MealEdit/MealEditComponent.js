@@ -1,27 +1,9 @@
 import React, { Component } from 'react';
 
-const ShowMeal = ({title, handleEdit}) => {
-    return (
-            <div className="Meal">
-                <div>
-                    {title}
-                </div>
-                <button type="button" onClick={handleEdit}>Edit</button>
-            </div>
-        );
-}
+import ShowMeal from './ShowMeal';
+import EditMeal from './EditMeal';
 
-const EditMeal = ({title, handleChange, handleSave, handleDelete}) => {
-    return (
-            <div className="Meal">
-                <input type="text" value={title} onChange={handleChange} />
-                <button type="button" onClick={handleSave}>Save</button>
-                <button type="button" onClick={handleDelete}>Delete</button>
-            </div>
-        );
-}
-
-class MealComponent extends Component {
+class MealEditComponent extends Component {
     constructor (props) {
         super(props);
         
@@ -34,7 +16,7 @@ class MealComponent extends Component {
     }
     
     componentWillMount () {
-        this.props.getMeals();
+        this.props.readMeals();
     }
     
     componentWillReceiveProps (nextProps) {
@@ -48,7 +30,7 @@ class MealComponent extends Component {
     }
     
     handleChange (event) {
-        this.setState({...this.state, title: event.target.value})
+        this.setState({...this.state, title: event.target.value});
     }
     
     handleDelete () {
@@ -60,24 +42,26 @@ class MealComponent extends Component {
     }
     
     handleSave () {
-        this.props.saveMeal(this.props.match.params.id, this.state.title);
+        this.props.updateMeal(this.props.match.params.id, this.state.title);
     }
     
     render () {
-        if (this.props.meals.data < 1) {
-            return <div>Loading...</div>;
+        if (this.props.meals.data.length < 1) {
+            return <div className="Loading">Loading...</div>;
         }
         
         const meal = this.props.meals.data.filter((item) => item._id === this.props.match.params.id);
         
         const mealTitle = this.state.title || meal[0].name;
+        
+        const content = this.state.type === 'edit' ? <EditMeal title={mealTitle} handleChange={(event) => this.handleChange(event)} handleSave={this.handleSave} handleDelete={this.handleDelete} /> : <ShowMeal title={mealTitle} handleEdit={() => this.handleEdit()} />;
 
         return (
             <div className="Meal">
-                {this.state.type === 'edit' ? <EditMeal title={mealTitle} handleChange={(event) => this.handleChange(event)} handleSave={this.handleSave} handleDelete={this.handleDelete} /> : <ShowMeal title={mealTitle} handleEdit={() => this.handleEdit()} />}
+                {content}
             </div>
             );
     }    
 }
 
-export default MealComponent;
+export default MealEditComponent;

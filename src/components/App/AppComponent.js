@@ -9,7 +9,7 @@ const App = ({store}) => {
     return (
         <Provider store={store}>
             <Router>
-                <div>
+                <div className="App">
                     <h1>
                         <Link to="/">What's For Lunch</Link>
                     </h1>

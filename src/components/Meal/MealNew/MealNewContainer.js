@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 
 import MealNewComponent from './MealNewComponent';
 
-import { setMealAsync } from 'actions/actions';
+import { createMealAsync } from 'actions/actions';
 
 const mapStateToProps = (state, ownProps) => {
   return {
@@ -12,7 +12,7 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
-        setMeal: (name) => dispatch(setMealAsync(name))
+        createMeal: (name) => dispatch(createMealAsync(name))
     };
 };
 

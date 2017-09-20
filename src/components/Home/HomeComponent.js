@@ -1,11 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+import MealRandom from './MealRandom';
 import MealsList from './MealsList';
 
-const HomeComponent = ({children, title}) => {
+const HomeComponent = () => {
     return (
         <div className="Home">
+            <MealRandom />
             <MealsList />
             <div>
                 <Link to="/meal/add">Add new</Link>

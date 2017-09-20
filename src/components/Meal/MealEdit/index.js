@@ -1,3 +1,3 @@
-import MealContainer from './MealContainer';
+import MealEditContainer from './MealEditContainer';
 
-export default MealContainer;
+export default MealEditContainer;

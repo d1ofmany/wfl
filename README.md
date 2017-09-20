@@ -10,13 +10,13 @@ There are 2 screens:
 - meal - displays editable meal inputs and delete button
 
 ## Tech stack
-- react
+- react, react router v4
 - redux
 
 ### TODO
-- build process and setup
-- heroku setup
-- initial frontend implementation
+- testing
+- implement redux form
+- add basic styling
 
 
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).

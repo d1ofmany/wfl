@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 
 import MealsListComponent from './MealsListComponent';
-import { getMealsAsync } from 'actions/actions';
+import { readMealsAsync } from 'actions/actions';
 
 const mapStateToProps = (state, ownProps) => {
     return {
@@ -11,7 +11,7 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
-        getMealsAsync: () => dispatch(getMealsAsync())
+        readMeals: () => dispatch(readMealsAsync())
     };
 };
 
